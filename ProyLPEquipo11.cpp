@@ -69,7 +69,7 @@ int XOR(int x, int y)
 
 int NOR(int x, int y)
 {
-	int a,a2,b,b2,s;
+	int a,b,s;
    a=NOT(x);
    b=NOT(y);
    s=AND(a,b);
@@ -78,14 +78,14 @@ int NOR(int x, int y)
 
 int NAND(int x, int y)
 {
-	int a,a2,b,b2,s;
+	int a,b,s;
    a=NOT(x);
    b=NOT(y);
-   s=OR(a2,b2);
+   s=OR(a,b);
    return s;
 }
 
-int X-NOR(int x, int y)
+int XNOR(int x, int y)
 {
 	int a,a2,b,b2,s;
    a=NOT(x);
@@ -108,24 +108,59 @@ void Mostrar()
 }
 main()
 {
-	int op;
+	int op,s;
 
-   cout<<"\t\t\tFUNCIONES LOGICAS";
-   cout<<"1.-Generar tabla de verdad con dos variables";
-   cout<<"2.-Ver tablas de verdad con dos entradas";
-   cout<<"3.-Generar y ver tabla con n entradas";
-   cout<<"4.-Salir";
+   cout<<"\t\t\tFUNCIONES LOGICAS\n";
+   cout<<"\n1.-Generar tabla de verdad con dos variables";
+   cout<<"\n2.-Ver tablas de verdad con dos entradas";
+   cout<<"\n3.-Generar y ver tabla con n entradas";
+   cout<<"\n4.-Salir";
+   cout<<"\nElija opcion: ";
    cin>>op;
    switch(op)
    {
    	case 1:
+      	borrar();
+         ofstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Tablas_dos_entradas.txt", ios::app);
+         archivo<<"Funcion AND";
+         archivo<<"\na  b  s";
+      	for(int i=0; i<=1 ; i++)
+         {
+           	for(int j=0; j<=1 ; j++)
+            {
+            	s=AND(i,j);
+               archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
+            }
+         }
+         archivo<<"\n\nFuncion OR";
+         archivo<<"\na  b  s";
+      	for(int i=0; i<=1 ; i++)
+         {
+           	for(int j=0; j<=1 ; j++)
+            {
+            	s=OR(i,j);
+               archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
+            }
+         }
+         archivo<<"\n\nFuncion NOT";
+         archivo<<"\na  s";
+      	for(int i=0; i<=1 ; i++)
+         {
+           	s=NOT(i);
+            archivo<<"\n"<<i<<"  "<<s;
+         }
+         archivo<<"\n\nFuncion XOR";
+         archivo<<"\na  b  s";
+      	for(int i=0; i<=1 ; i++)
+         {
+           	for(int j=0; j<=1 ; j++)
+            {
+            	s=XOR(i,j);
+               archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
+            }
+         }
       	break;
-      case 2:
-      	break;
-      case 3:
-      	break;
-      case 4:
-      	break;
+
    }
    getch();
 }

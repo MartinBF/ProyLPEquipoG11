@@ -1,0 +1,25 @@
+Funcion AND
+a  b  s
+0  0  0
+0  1  0
+1  0  0
+1  1  1
+
+Funcion OR
+a  b  s
+0  0  0
+0  1  1
+1  0  1
+1  1  1
+
+Funcion NOT
+a  s
+0  1
+1  0
+
+Funcion XOR
+a  b  s
+0  0  0
+0  1  1
+1  0  1
+1  1  0
