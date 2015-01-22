@@ -55,6 +55,47 @@ int NOT(int a)
    }
    return s;
 }
+
+int XOR(int x, int y)
+{
+	int a,a2,b,b2,s;
+   a=NOT(x);
+   a2=AND(a,y);
+   b=NOT(y);
+   b2=AND(x,b);
+   s=OR(a2,b2);
+   return s;
+}
+
+int NOR(int x, int y)
+{
+	int a,a2,b,b2,s;
+   a=NOT(x);
+   b=NOT(y);
+   s=AND(a,b);
+   return s;
+}
+
+int NAND(int x, int y)
+{
+	int a,a2,b,b2,s;
+   a=NOT(x);
+   b=NOT(y);
+   s=OR(a2,b2);
+   return s;
+}
+
+int X-NOR(int x, int y)
+{
+	int a,a2,b,b2,s;
+   a=NOT(x);
+   a2=NOT(y);
+   b=AND(a,a2);
+   b2=AND(x,b);
+   s=OR(b,b2);
+   return s;
+}
+
 void Mostrar()
 {
 	ifstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Tablas_dos_entradas.txt", ios::in);
