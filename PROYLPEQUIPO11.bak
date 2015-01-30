@@ -91,7 +91,7 @@ int XNOR(int x, int y)
    a=NOT(x);
    a2=NOT(y);
    b=AND(a,a2);
-   b2=AND(x,b);
+   b2=AND(x,y);
    s=OR(b,b2);
    return s;
 }
@@ -110,11 +110,14 @@ main()
 {
 	int op,s;
 
-   cout<<"\t\t\tFUNCIONES LOGICAS\n";
-   cout<<"\n1.-Generar tabla de verdad con dos variables";
-   cout<<"\n2.-Ver tablas de verdad con dos entradas";
-   cout<<"\n3.-Generar y ver tabla con n entradas";
-   cout<<"\n4.-Salir";
+   cout<<"||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+   cout<<"||\t\t\tFUNCIONES LOGICAS         ||";
+   cout<<"\n|| 1.-Generar tabla de verdad con dos variables   ||";
+   cout<<"\n|| 2.-Ver tablas de verdad con dos entradas       ||";
+   cout<<"\n|| 3.-Generar y ver tabla con n entradas          ||";
+   cout<<"\n|| 4.-Salir                                       ||";
+   cout<<"\n||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+
    cout<<"\nElija opcion: ";
    cin>>op;
    switch(op)
@@ -169,6 +172,30 @@ main()
                archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
             }
          }
+         archivo<<"\n\nFuncion NAND";
+         archivo<<"\na  b  s";
+      	for(int i=0; i<=1 ; i++)
+         {
+           	for(int j=0; j<=1 ; j++)
+            {
+            	s=NAND(i,j);
+               archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
+            }
+         }
+         archivo<<"\n\nFuncion X-NOR";
+         archivo<<"\na  b  s";
+      	for(int i=0; i<=1 ; i++)
+         {
+           	for(int j=0; j<=1 ; j++)
+            {
+            	s=XNOR(i,j);
+               archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
+            }
+         }
+
+      cout<<"\n se a generado las tablas de verdad:";
+      cout<<"\n se a almacenado en el archivo Tabla de 2 entradas.txt";
+      cout<<"\n se almaceno en la direccion: \n D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Tablas_dos_entradas.txt";
       	break;
 
    }
