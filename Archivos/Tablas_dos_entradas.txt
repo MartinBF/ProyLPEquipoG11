@@ -23,3 +23,24 @@ a  b  s
 0  1  1
 1  0  1
 1  1  0
+
+Funcion NOR
+a  b  s
+0  0  1
+0  1  0
+1  0  0
+1  1  0
+
+Funcion NAND
+a  b  s
+0  0  1
+0  1  1
+1  0  1
+1  1  0
+
+Funcion X-NOR
+a  b  s
+0  0  1
+0  1  0
+1  0  0
+1  1  1
