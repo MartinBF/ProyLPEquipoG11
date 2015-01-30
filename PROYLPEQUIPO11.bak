@@ -3,26 +3,6 @@
 # include <fstream>
 # include <iomanip>
 
-void crear_archivo()
-{
-	ofstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Tablas_dos_entradas.txt");
-   archivo.close();
-}
-
-void crear_ntabla()
-{
-	ofstream ntabla("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Tabla_n.txt");
-   ntabla.close();
-}
-
-
-
-void borrar()
-{
-	ofstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Tablas_dos_entradas.txt", ios::trunc);
-   archivo.close();
-}
-
 int valor(int a, int b, int cc)
 {
 	int v[10],s;
@@ -119,7 +99,7 @@ int XNOR(int x, int y)
 
 void Mostrar()
 {
-	ifstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Tablas_dos_entradas.txt", ios::in);
+	ifstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Final.txt", ios::in);
    char caracter;
    while(!archivo.eof())
    {
@@ -129,24 +109,10 @@ void Mostrar()
    archivo.close();
    getch();
 }
-
-void Mostrar_n()
-{
-   char caracter;
-	ifstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Tabla_n.txt", ios::in);
-   while(!archivo.eof())
-   {
-   	archivo.get(caracter);
-      cout<<caracter;
-   }
-   archivo.close();
-   getch();
-}
-
 
 void Encabezado(int a, int b)
 {
-	ofstream ntabla("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Tabla_n.txt", ios::app);
+	ofstream ntabla("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Final.txt", ios::app);
    switch(a)
    {
    	case 1:
@@ -184,7 +150,7 @@ void Encabezado(int a, int b)
 
 void imprimir_n(int a, int b)
 {
-	ofstream ntabla("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Tabla_n.txt", ios::app);
+	ofstream ntabla("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Final.txt", ios::app);
    if(b==1)
    {
    	ntabla<<a<<"  ";
@@ -194,6 +160,12 @@ void imprimir_n(int a, int b)
    	ntabla<<a<<"\n";
    }
    ntabla.close();
+}
+
+void borrar()
+{
+	ofstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Final.txt", ios::trunc);
+   archivo.close();
 }
 
 main()
@@ -217,7 +189,7 @@ main()
       	borrar();
          cout<<"\n se a generado las tablas de verdad:";
    	   cout<<"\n se a almacenado en el archivo Tabla de 2 entradas.txt";
-      	cout<<"\n se almaceno en la direccion: \n D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Tablas_dos_entradas.txt";
+      	cout<<"\n se almaceno en la direccion: \n D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Final.txt";
       	break;
 
    	case (2):
@@ -292,108 +264,7 @@ main()
                }
                Mostrar_n;
                break;
-            case 3:
-		      	 cout<<"La funcion NOT no funciona con "<<n<<" variables.";
-      		    break;
-            case 4:
-            	Encabezado(fp,n);
-               while(e<t)
-               {
-                  for(i=0 ; i<n ; i++)
-                  {
-               		if(i==0)
-	                  {
-   	               	s=valor(n,e,i);
-                        imprimir_n(s,1);
-      	            }
-                     else
-                     {
-                     	a=valor(n,e,i);
-                        r=XOR(s,a);
-                        s=r;
-                        imprimir_n(a,1);
-                     }
-                  }
-                  imprimir_n(s,0);
-                  e++;
-               }
-               Mostrar_n;
-            case 5:
-            	Encabezado(fp,n);
-               while(e<t)
-               {
-                  for(i=0 ; i<n ; i++)
-                  {
-               		if(i==0)
-	                  {
-   	               	s=valor(n,e,i);
-                        imprimir_n(s,1);
-      	            }
-                     else
-                     {
-                     	a=valor(n,e,i);
-                        r=NOR(s,a);
-                        s=r;
-                        imprimir_n(a,1);
-                     }
-                  }
-                  imprimir_n(s,0);
-                  e++;
-               }
-               Mostrar_n;
-               break;
-            case 6:
-            	Encabezado(fp,n);
-               while(e<t)
-               {
-                  for(i=0 ; i<n ; i++)
-                  {
-               		if(i==0)
-	                  {
-   	               	s=valor(n,e,i);
-                        imprimir_n(s,1);
-      	            }
-                     else
-                     {
-                     	a=valor(n,e,i);
-                        r=NAND(s,a);
-                        s=r;
-                        imprimir_n(a,1);
-                     }
-                  }
-                  imprimir_n(s,0);
-                  e++;
-               }
-               Mostrar_n;
-               break;
-            case 7:
-            	Encabezado(fp,n);
-               while(e<t)
-               {
-                  for(i=0 ; i<n ; i++)
-                  {
-               		if(i==0)
-	                  {
-   	               	s=valor(n,e,i);
-                        imprimir_n(s,1);
-      	            }
-                     else
-                     {
-                     	a=valor(n,e,i);
-                        r=XNOR(s,a);
-                        s=r;
-                        imprimir_n(a,1);
-                     }
-                  }
-                  imprimir_n(s,0);
-                  e++;
-               }
-               Mostrar_n;
-               break;
-            default:
-            	cout<<"Error";
-         }
-      	break;
+
       case 4:
       	cout<<"Gracias por su tiempo";
       default:

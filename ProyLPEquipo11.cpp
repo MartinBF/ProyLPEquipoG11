@@ -1,7 +1,6 @@
 # include <iostream>
 # include <conio>
 # include <fstream>
-# include <iomanip>
 
 int valor(int a, int b, int cc)
 {
@@ -97,22 +96,96 @@ int XNOR(int x, int y)
    return s;
 }
 
-void Mostrar()
+void borrar()
 {
-	ifstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Final.txt", ios::in);
-   char caracter;
-   while(!archivo.eof())
+	ofstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Dos_Entradas.txt", ios::in | ios::trunc);
+   archivo.close();
+}
+
+void modificar_archivo()
+{
+int i,j,s;
+	ofstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Dos_Entradas.txt");
+   borrar();
+   archivo<<"Funcion AND";
+   archivo<<"\na  b  s";
+  	for(i=0; i<=1 ; i++)
    {
-   	archivo.get(caracter);
-      cout<<caracter;
+ 	 	for(j=0; j<=1 ; j++)
+      {
+   	  	s=AND(i,j);
+         archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
+      }
+   }
+   archivo<<"\n\nFuncion OR";
+   archivo<<"\na  b  s";
+   for(i=0; i<=1 ; i++)
+   {
+    	for(j=0; j<=1 ; j++)
+      {
+       	s=OR(i,j);
+         archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
+      }
+   }
+   archivo<<"\n\nFuncion NOT";
+   archivo<<"\na  s";
+   for(i=0; i<=1 ; i++)
+   {
+     	s=NOT(i);
+      archivo<<"\n"<<i<<"  "<<s;
+   }
+   archivo<<"\n\nFuncion XOR";
+   archivo<<"\na  b  s";
+   for(i=0; i<=1 ; i++)
+   {
+     	for(j=0; j<=1 ; j++)
+      {
+        	s=XOR(i,j);
+         archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
+      }
+   }
+   archivo<<"\n\nFuncion NOR";
+   archivo<<"\na  b  s";
+   for(i=0; i<=1 ; i++)
+   {
+     	for(j=0; j<=1 ; j++)
+      {
+        	s=NOR(i,j);
+         archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
+      }
+   }
+   archivo<<"\n\nFuncion NAND";
+   archivo<<"\na  b  s";
+   for(i=0; i<=1 ; i++)
+   {
+    	for(j=0; j<=1 ; j++)
+      {
+      	s=NAND(i,j);
+         archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
+      }
+   }
+   archivo<<"\n\nFuncion X-NOR";
+   archivo<<"\na  b  s";
+   for(i=0; i<=1 ; i++)
+   {
+     	for(j=0; j<=1 ; j++)
+      {
+      	s=XNOR(i,j);
+         archivo<<"\n"<<i<<"  "<<j<<"  "<<s;
+       }
    }
    archivo.close();
-   getch();
+}
+
+void borrar2()
+{
+	ofstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Indefinido.txt", ios::trunc);
+   archivo.close();
 }
 
 void Encabezado(int a, int b)
 {
-	ofstream ntabla("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Final.txt", ios::app);
+	ofstream ntabla("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Indefinido.txt", ios::in);
    switch(a)
    {
    	case 1:
@@ -150,7 +223,7 @@ void Encabezado(int a, int b)
 
 void imprimir_n(int a, int b)
 {
-	ofstream ntabla("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Final.txt", ios::app);
+	ofstream ntabla("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Indefinido.txt", ios::app);
    if(b==1)
    {
    	ntabla<<a<<"  ";
@@ -162,113 +235,259 @@ void imprimir_n(int a, int b)
    ntabla.close();
 }
 
-void borrar()
+void Mostrar()
 {
-	ofstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Final.txt", ios::trunc);
+	ifstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Indefinido.txt", ios::in);
+   char caracter;
+   while(!archivo.eof())
+   {
+   	archivo.get(caracter);
+      cout<<caracter;
+   }
    archivo.close();
+   getch();
+   clrscr();
+}
+
+void comparacion()
+{
+	char caracter;
+	ifstream archivo("D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Dos_Entradas.txt", ios::in);
+   clrscr();
+   if(archivo.good())
+   {
+   	cout<<"El contenido del archivo es: \n";
+   	while(!archivo.eof())
+   	{
+   		archivo.get(caracter);
+      	cout<<caracter;
+   	}
+   	archivo.close();
+   }
+   else
+   {
+   	cout<<"El archivo no existe si desea crearlo selecciones la opcion 1.";
+   }
+   getch();
+   clrscr();
 }
 
 main()
 {
 	int op,n,fp,i,a,s,r;
-   int t=1,e=0;
-
-   cout<<"||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
-   cout<<"||\t\t\tFUNCIONES LOGICAS         ||";
-   cout<<"\n|| 1.-Generar tabla de verdad con dos variables   ||";
-   cout<<"\n|| 2.-Ver tablas de verdad con dos entradas       ||";
-   cout<<"\n|| 3.-Generar y ver tabla con n entradas          ||";
-   cout<<"\n|| 4.-Salir                                       ||";
-   cout<<"\n||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
-
-   cout<<"\nElija opcion: ";
-   cin>>op;
-   switch(op)
+   int t=1,e=0,cr=0;
+   do
    {
-   	case (1):
-      	borrar();
-         cout<<"\n se a generado las tablas de verdad:";
-   	   cout<<"\n se a almacenado en el archivo Tabla de 2 entradas.txt";
-      	cout<<"\n se almaceno en la direccion: \n D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Final.txt";
-      	break;
+	   cout<<"||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+   	cout<<"||\t\t\tFUNCIONES LOGICAS         ||";
+	   cout<<"\n|| 1.-Generar tabla de verdad con dos variables   ||";
+   	cout<<"\n|| 2.-Ver tablas de verdad con dos entradas       ||";
+	   cout<<"\n|| 3.-Generar y ver tabla con n entradas          ||";
+   	cout<<"\n|| 4.-Salir                                       ||";
+	   cout<<"\n||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+	   cout<<"\nElija opcion: ";
+   	cin>>op;
+	   switch(op)
+   	{
+   		case (1):
+	         modificar_archivo();
+		      cout<<"\n se a generado las tablas de verdad:";
+   		   cout<<"\n se a almacenado en el archivo Tabla de 2 entradas.txt";
+      		cout<<"\n se almaceno en la direccion: \n D:/ProyLPEquipo11/ProyLPEquipo11/Archivos/Dos_Entradas.txt";
+            getch();
+            clrscr();
+	      	break;
 
-   	case (2):
-      	cout<<"Hola";
-	   	break;
+   		case (2):
+      		comparacion();
+		   	break;
 
-   	case 3:
-
-      	cout<<"\nIngrese la cantidad de variables a operar: ";
-	      cin>>n;
-         for(i=1;i<=n;i++)
-   		{
-		   	t=t*2;
-		   }
-   	   cout<<"\n\t\t\tELIJA LA FUNCION";
-      	cout<<"\n1.-AND";
-	      cout<<"\n2.-OR";
-   	   cout<<"\n3.-NOT";
-      	cout<<"\n4.-XOR";
-	      cout<<"\n5.-NOR";
-   	   cout<<"\n6.-NAND";
-      	cout<<"\n7.-X-NOR";
-	      cout<<"\nElija la funcion: ";
-   	   cin>>fp;
-         switch(fp)
-         {
-         	case 1:
-            	Encabezado(fp,n);
-               while(e<t)
-               {
-                  for(i=0 ; i<n ; i++)
-                  {
-               		if(i==0)
+   		case 3:
+      	   clrscr();
+      		cout<<"\nIngrese la cantidad de variables a operar: ";
+		      cin>>n;
+   	      for(i=1;i<=n;i++)
+   			{
+		   		t=t*2;
+			   }
+      	   cout<<"\n\t\t\tELIJA LA FUNCION";
+   	   	cout<<"\n1.-AND";
+	   	   cout<<"\n2.-OR";
+   	   	cout<<"\n3.-NOT";
+	      	cout<<"\n4.-XOR";
+		      cout<<"\n5.-NOR";
+   		   cout<<"\n6.-NAND";
+      		cout<<"\n7.-X-NOR";
+		      cout<<"\nElija la funcion: ";
+   		   cin>>fp;
+      	   clrscr();
+         	switch(fp)
+	         {
+   	      	case 1:
+                  borrar2();
+      	      	Encabezado(fp,n);
+         	      while(e<t)
+            	   {
+               	   for(i=0 ; i<n ; i++)
 	                  {
-   	               	s=valor(n,e,i);
-                        imprimir_n(s,1);
+   	            		if(i==0)
+	   	               {
+   	   	            	s=valor(n,e,i);
+            	            imprimir_n(s,1);
+      	      	      }
+                  	   else
+                     	{
+	                     	a=valor(n,e,i);
+   	                     r=AND(s,a);
+      	                  s=r;
+         	               imprimir_n(a,1);
+            	         }
+               	   }
+                  	imprimir_n(s,0);
+	                  e++;
+   	            }
+      	         Mostrar();
+         	      break;
+            	case 2:
+               	borrar2();
+	            	Encabezado(fp,n);
+   	            while(e<t)
+      	         {
+         	         for(i=0 ; i<n ; i++)
+            	      {
+               			if(i==0)
+	               	   {
+   	               		s=valor(n,e,i);
+                        	imprimir_n(s,1);
+	      	            }
+   	                  else
+      	               {
+         	            	a=valor(n,e,i);
+            	            r=OR(s,a);
+               	         s=r;
+                  	      imprimir_n(a,1);
+                     	}
+	                  }
+   	               imprimir_n(s,0);
+      	            e++;
+         	      }
+            	   Mostrar();
+               	break;
+	            case 3:
+			      	 cout<<"La funcion NOT no funciona con "<<n<<" variables.";
+                   getch();
+                   clrscr();
+      			    break;
+         	   case 4:
+               	borrar2();
+            		Encabezado(fp,n);
+               	while(e<t)
+	               {
+   	               for(i=0 ; i<n ; i++)
+      	            {
+         	      		if(i==0)
+	         	         {
+   	         	      	s=valor(n,e,i);
+                  	      imprimir_n(s,1);
+      	            	}
+	                     else
+   	                  {
+      	               	a=valor(n,e,i);
+         	               r=XOR(s,a);
+            	            s=r;
+               	         imprimir_n(a,1);
+                  	   }
+	                  }
+   	               imprimir_n(s,0);
+      	            e++;
+         	      }
+            	   Mostrar();
+	            case 5:
+               	borrar2();
+   	         	Encabezado(fp,n);
+      	         while(e<t)
+         	      {
+            	      for(i=0 ; i<n ; i++)
+               	   {
+               			if(i==0)
+	                  	{
+   	               		s=valor(n,e,i);
+	                        imprimir_n(s,1);
+   	   	            }
+      	               else
+         	            {
+            	         	a=valor(n,e,i);
+               	         r=NOR(s,a);
+                  	      s=r;
+                     	   imprimir_n(a,1);
+	                     }
+   	               }
+      	            imprimir_n(s,0);
+         	         e++;
+            	   }
+               	Mostrar();
+	               break;
+   	         case 6:
+               	borrar2();
+      	      	Encabezado(fp,n);
+         	      while(e<t)
+            	   {
+               	   for(i=0 ; i<n ; i++)
+                  	{
+               			if(i==0)
+		                  {
+   		               	s=valor(n,e,i);
+      	                  imprimir_n(s,1);
+      		            }
+            	         else
+               	      {
+                  	   	a=valor(n,e,i);
+                     	   r=NAND(s,a);
+                        	s=r;
+	                        imprimir_n(a,1);
+   	                  }
       	            }
-                     else
-                     {
-                     	a=valor(n,e,i);
-                        r=AND(s,a);
-                        s=r;
-                        imprimir_n(a,1);
-                     }
-                  }
-                  imprimir_n(s,0);
-                  e++;
-               }
-               Mostrar_n;
-               break;
-            case 2:
-            	Encabezado(fp,n);
-               while(e<t)
-               {
-                  for(i=0 ; i<n ; i++)
-                  {
-               		if(i==0)
+         	         imprimir_n(s,0);
+            	      e++;
+               	}
+	               Mostrar();
+   	            break;
+      	      case 7:
+               	borrar2();
+         	   	Encabezado(fp,n);
+            	   while(e<t)
+               	{
+                  	for(i=0 ; i<n ; i++)
 	                  {
-   	               	s=valor(n,e,i);
-                        imprimir_n(s,1);
-      	            }
-                     else
-                     {
-                     	a=valor(n,e,i);
-                        r=OR(s,a);
-                        s=r;
-                        imprimir_n(a,1);
-                     }
-                  }
-                  imprimir_n(s,0);
-                  e++;
-               }
-               Mostrar_n;
-               break;
-
-      case 4:
-      	cout<<"Gracias por su tiempo";
-      default:
-      	cout<<"Error";
-   }
+   	            		if(i==0)
+	   	               {
+   	   	            	s=valor(n,e,i);
+            	            imprimir_n(s,1);
+      	      	      }
+                  	   else
+                     	{
+                     		a=valor(n,e,i);
+	                        r=XNOR(s,a);
+   	                     s=r;
+      	                  imprimir_n(a,1);
+         	            }
+            	      }
+               	   imprimir_n(s,0);
+                  	e++;
+	               }
+   	            Mostrar();
+      	         break;
+         	   default:
+            		cout<<"Error";
+	         }
+   	   	break;
+      	case 4:
+      		cout<<"Gracias por su tiempo";
+            cr++;
+            break;
+	      default:
+   	   	cout<<"Error";
+	   }
+   }while(cr==0);
    getch();
 }
